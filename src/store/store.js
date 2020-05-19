@@ -6,7 +6,9 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     // TODO - SWITCH BACK TO PROD
-    extensionID: "oikgofeboedgfkaacpfepbfmgdalabej", //PROD: oikgofeboedgfkaacpfepbfmgdalabej / DEV: cpdaoleiojomipifgjmkjjkmfecanfdo
+    extensionID: "mhkffmllohoiiflajcdmpkfdioknejhb", // prod maxired
+   // extensionID: "kpffedpijkadjeeabjhllpggmhpekole", // dev maxired
+    //extensionID: "oikgofeboedgfkaacpfepbfmgdalabej", //PROD: oikgofeboedgfkaacpfepbfmgdalabej / DEV: cpdaoleiojomipifgjmkjjkmfecanfdo
     userData: {},
     messages: [],
     hands: [],
@@ -27,6 +29,13 @@ export default new Vuex.Store({
 
   mutations: {
     addMessage(state, data) {
+      if(data.emoji === 'hand') {
+        window.confetti && window.confetti({
+          particleCount: 100,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
+      }
       state.messages.unshift(data);
     },
     removeMessage(state, messageData) {

@@ -28,9 +28,10 @@ const injectScript = (file_path, type = "script", tag = "html") => {
   document.body.prepend(app);
 
   // Inject script into page
-  injectScript("//m.servedby-buysellads.com/monetization.js", "script", "head");
-  injectScript("https://www.googletagmanager.com/gtag/js?id=UA-162154532-1", "script", "head");
+  injectScript("https://cdn.jsdelivr.net/npm/canvas-confetti@1.2.0/dist/confetti.browser.min.js", "script", "head");
+  injectScript("https://www.googletagmanager.com/gtag/js?id=UA-155560918-5", "script", "head");
   injectScript(chrome.runtime.getURL("dist/app.css"), "link", "head");
   injectScript(chrome.runtime.getURL("dist/app.js"), "script", "html");
   injectScript(chrome.runtime.getURL("dist/chunk-vendors.js"), "script", "html");
+
 })();

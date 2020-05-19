@@ -1,6 +1,6 @@
 <template>
   <div class="tray-button-outer" tabindex="0" @focus="closeDropdown" @keyup.enter="sendHand()" @click="sendHand()">
-    <a class="tray-button" tabindex="-1" aria-label="Raise your hand" role="button">
+    <a class="tray-button" tabindex="-1" aria-label="Send Party Poppers" role="button">
       <div class="tray-button-bg"></div>
       <img :src="getHand" style="height: 32px;" />
     </a>
@@ -13,7 +13,7 @@ import { generateUUID } from "../../../utils/index";
 export default {
   computed: {
     getHand() {
-      return `chrome-extension://${this.$store.state.extensionID}/img/tones/${this.$store.state.tone}/hand.gif`;
+      return `chrome-extension://${this.$store.state.extensionID}/img/hand.png`;
     },
     getUsername() {
       if (this.$store.state.isFullName) {
@@ -31,25 +31,25 @@ export default {
       const id = generateUUID();
       // Send local version to store
       if (this.$store.state.hands.filter(h => h.owner === true).length < 1) {
-        this.$store.dispatch("addHand", {
+
+         this.$store.dispatch("addMessage", {
+          messageId: generateUUID(),
           emoji: "hand",
-          username: `${this.getUsername} raised their hand`,
+          username: this.getUsername,
           img: this.$store.getters.getUser("avatar"),
-          messageId: id,
           owner: true,
-          tone: this.$store.state.tone
+          tone: this.$store.state.tone,
         });
-        // Send one over the websocket to other users
+
         this.$socket.sendObj({
-          action: "QUEUE",
+          action: "MESSAGE",
           message: {
             id: this.$store.getters.getUser("meetingID"),
             emoji: "hand",
-            username: `${this.getUsername} raised their hand`,
+            username: this.getUsername,
             img: this.$store.getters.getUser("avatar"),
-            messageId: id,
-            tone: this.$store.state.tone
-          }
+            tone: this.$store.state.tone,
+          },
         });
 
         this.$gtag.event("click", {

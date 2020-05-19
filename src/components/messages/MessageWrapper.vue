@@ -1,9 +1,5 @@
 <template>
   <div>
-    <transition-group name="fading" class="nod-message-wrapper">
-      <Message v-for="msg in messages" :key="msg.messageId" :emoji="msg.emoji" :username="msg.username" :img="msg.img" :tone="msg.tone" />
-      <Hand v-for="hand in hands" :key="hand.messageId" :username="hand.username" :img="hand.img" :messageId="hand.messageId" :tone="hand.tone" />
-    </transition-group>
   </div>
 </template>
 

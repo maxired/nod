@@ -34,10 +34,11 @@ export default {
       const dataScript = contains("script", "ds:7");
       const userData = JSON.parse(dataScript[1].text.match(/\[[^\}]*/)[0]);
 
+      const name =  userData[6] || 'Guest'
       let data = {
         meetingID: document.querySelector("[data-unresolved-meeting-id]").getAttribute("data-unresolved-meeting-id"),
-        name: userData[6].split(" ")[0],
-        fullName: userData[6],
+        name: name.split(" ")[0],
+        fullName: name,
         team: userData[28],
         avatar: userData[5],
       };

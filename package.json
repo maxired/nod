@@ -9,6 +9,8 @@
     "deploy-prod": "cd deploy/prodV2 && serverless"
   },
   "dependencies": {
+    "@serverless/aws-dynamodb": "^4.0.0",
+    "serverless": "^1.69.0",
     "vue": "^2.6.11",
     "vue-gtag": "^1.6.2",
     "vue-native-websocket": "^2.0.14",

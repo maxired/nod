@@ -1,3 +1,6 @@
+org: maxired
+app: my-first-app
+
 connectionTable:
   component: "@serverless/aws-dynamodb"
   inputs:

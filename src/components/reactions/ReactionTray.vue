@@ -1,32 +1,18 @@
 <template>
   <div class="main-tray">
-    <div class="tray-inner" :class="{ open: trayOpen }">
-      <ReactionsButton />
-      <div class="divider"></div>
+    <div class="tray-inner">
       <HandUpButton />
-      <div class="divider"></div>
-      <SettingsButton />
     </div>
   </div>
 </template>
 
 <script>
 import HandUpButton from "./buttons/HandUpButton";
-import ReactionsButton from "./buttons/ReactionsButton";
-import SettingsButton from "./buttons/SettingsButton";
 
 export default {
   components: {
     HandUpButton,
-    ReactionsButton,
-    SettingsButton
   },
-  computed: {
-    trayOpen() {
-      return this.$store.state.reactions || this.$store.state.settings;
-    }
-  },
-
   created: function() {
     const tone = localStorage.getItem("nod-skinTone");
     if (tone) {
@@ -77,10 +63,6 @@ export default {
   background-color: #f1f3f4;
   margin: 12px 0;
   width: 1px;
-}
-
-.open {
-  border-radius: 0;
 }
 
 .tray-button {

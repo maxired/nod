@@ -6,12 +6,15 @@ import VueGtag from "vue-gtag";
 
 Vue.config.productionTip = false;
 
-Vue.use(VueNativeSock, "wss://j24amtdvi4.execute-api.us-east-1.amazonaws.com/prod", {
+const devUrl = `wss://dxpuzhzpq8.execute-api.us-east-1.amazonaws.com/dev`
+const prodUrl = `wss://vw0c45hcyh.execute-api.us-east-1.amazonaws.com/prod/`
+
+Vue.use(VueNativeSock, prodUrl, {
   format: "json"
 });
 
 Vue.use(VueGtag, {
-  config: { id: "UA-162154532-1" },
+  config: { id: "UA-155560918-5" },
   disableScriptLoad: true
 });
 

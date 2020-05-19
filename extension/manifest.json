@@ -1,24 +1,23 @@
 {
   "manifest_version": 2,
-  "name": "Nod - Reactions for Google Meet",
-  "version": "2.4.3",
-  "description": "Quick emoji reactions for muted team members",
+  "name": "Google Meet Party Button",
+  "version": "1.0.0",
+  "description": "Add a party Button in google Meet",
   "content_scripts": [
     {
-      "matches": ["*://meet.google.com/**-**-**"],
+      "matches": ["https://meet.google.com/**-**-**"],
       "js": ["inject.js"]
     }
   ],
-  "web_accessible_resources": ["content.js", "dist/*", "img/*", "https://www.googletagmanager.com/gtag/js?id=UA-162154532-1", "//m.servedby-buysellads.com/monetization.js"],
-  "icons": { "16": "icons/16.png", "48": "icons/48.png", "128": "icons/128.png" },
+  "web_accessible_resources": ["content.js", "dist/*", "img/*", "https://www.googletagmanager.com/gtag/js?id=UA-155560918-5"],
+  "icons": { "16": "icons/party.16.png", "48": "icons/party.48.png", "128": "icons/party.128.png" },
   "background": {
     "scripts": ["background.js"]
   },
   "browser_action": {
-    "default_icon": "icons/16.png"
+    "default_icon": "icons/party.16.png"
   },
   "externally_connectable": {
-    "matches": ["*://meet.google.com/**-**-**"]
-  },
-  "optional_permissions": ["notifications", "*://meet.google.com/**-**-**"]
+    "matches": ["https://meet.google.com/**-**-**"]
+  }
 }
