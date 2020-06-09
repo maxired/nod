@@ -24,7 +24,7 @@ const injectScript = (file_path, type = "script", tag = "html") => {
 
   // Create wrapper for Vue App
   const app = document.createElement("DIV");
-  app.setAttribute("id", "app");
+  app.setAttribute("id", "app_meet_party_button");
   document.body.prepend(app);
 
   // Inject script into page

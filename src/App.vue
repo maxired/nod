@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app_meet_party_button" :class="nodDetected ? 'withNode' : ''">
     <ReactionTray v-if="loaded" />
     <MessageWrapper v-if="loaded" />
   </div>
@@ -15,6 +15,7 @@ export default {
   data() {
     return {
       loaded: false,
+      nodDetected: false,
     };
   },
   components: {
@@ -27,6 +28,8 @@ export default {
       this.websocketInit();
       this.setupListeners();
     };
+
+    this.setupObserver();
   },
 
   methods: {
@@ -35,12 +38,16 @@ export default {
       const userData = JSON.parse(dataScript[1].text.match(/\[[^\}]*/)[0]);
 
       const name =  userData[6] || 'Guest'
+
+      const withNode = !!document.querySelector('#app');
+
       let data = {
         meetingID: document.querySelector("[data-unresolved-meeting-id]").getAttribute("data-unresolved-meeting-id"),
         name: name.split(" ")[0],
         fullName: name,
         team: userData[28],
         avatar: userData[5],
+        withNode,
       };
       this.$store.dispatch("addUserData", data);
 
@@ -121,17 +128,47 @@ export default {
       });
       this.$socket.close();
     },
+
+    setupObserver(){
+      var body = document.querySelector('body');
+
+// Options de l'observateur (quelles sont les mutations à observer)
+var config = { attributes: false, childList: true };
+
+// Fonction callback à éxécuter quand une mutation est observée
+const callback = (mutationsList)  => {
+    for(var mutation of mutationsList) {
+        if (mutation.type == 'childList') {
+            const hasAppIp = Array.from(mutation.addedNodes).find(node => node.id === 'app')
+            if(hasAppIp){
+              this.nodDetected = true
+            }
+        }
+    }
+};
+
+// Créé une instance de l'observateur lié à la fonction de callback
+const observer = new MutationObserver(callback);
+
+// Commence à observer le noeud cible pour les mutations précédemment configurées
+observer.observe(body, config);
+    }
   },
 };
 </script>
 
 <style>
-#app {
+#app_meet_party_button {
   position: absolute;
   top: 0;
   left: 0;
   bottom: 0;
   z-index: 100000;
+}
+
+#app_meet_party_button.withNode {
+    top: 48px;
+    z-index: 2;
 }
 
 /* Styles for Meet */

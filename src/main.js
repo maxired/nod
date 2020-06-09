@@ -23,4 +23,4 @@ new Vue({
   render: function(h) {
     return h(App);
   }
-}).$mount("#app");
+}).$mount("#app_meet_party_button");
